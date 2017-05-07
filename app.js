@@ -13,13 +13,43 @@ var bookRouter = express.Router();
 //better way to handle all the 
 bookRouter.route('/books')
         .get(function(req,res){
-            Book.find(function(err,books){
+            //var query=req.query;
+            var query={};
+            if(req.query.genre){
+                query.genre=req.query.genre;
+            }
+            Book.find(query,function(err,books){
                 if(err){
+                    res.status(500).send(err);
                     console.log(err);
                 }
                 else{
                     console.log('connected');
                     res.json(books);
+                }
+            })
+            
+            //var responseJson={Hello:'My api'};
+            //res.json(responseJson);
+        });
+
+//For single id
+
+bookRouter.route('/books:bookId')
+        .get(function(req,res){
+            //var query=req.query;
+            var query={};
+            if(req.query.genre){
+                query.genre=req.query.genre;
+            }
+            Book.findById(req.params.bookId,function(err,book){
+                if(err){
+                    res.status(500).send(err);
+                    console.log(err);
+                }
+                else{
+                    console.log('connected');
+                    res.json(book);
                 }
             })
             
