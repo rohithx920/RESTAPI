@@ -1,5 +1,9 @@
 var express=require('express');
-var moongose=require('mongoose');
+var mongoose=require('mongoose');
+
+var db=mongoose.connect('mongodb://localhost/bookapi')
+
+var Book=require('./models/bookModel');
 
 var app=express();
 
@@ -9,8 +13,18 @@ var bookRouter = express.Router();
 //better way to handle all the 
 bookRouter.route('/books')
         .get(function(req,res){
-            var responseJson={Hello:'My api'};
-            res.json(responseJson);
+            Book.find(function(err,books){
+                if(err){
+                    console.log(err);
+                }
+                else{
+                    console.log('connected');
+                    res.json(books);
+                }
+            })
+            
+            //var responseJson={Hello:'My api'};
+            //res.json(responseJson);
         });
 
 app.use('/api', bookRouter);
