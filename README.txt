@@ -23,4 +23,13 @@
 
 10) npm install mongoose --save
 	-> it is going to take mongo data and convert into JSON object
+
+11) To Connect Mongodb 
+ 	open new cmd promt and start mongo server
+	using mongod command
+->C:\MongoDB\Server\3.4\bin>mongo
+
+12)type gulp in our project floder
+
+
    
