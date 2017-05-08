@@ -31,5 +31,13 @@
 
 12)type gulp in our project floder
 
+13)npm install body-parser --save
+	-> it is middleware that can read body content and parse it to json
+
+14) Making app to know that we will be using body parser
+app.use(bodyParser.urlencoded({extended:true}))
+app.use(bodyParser.json())
+
+
 
    

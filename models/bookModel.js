@@ -8,7 +8,7 @@ var bookModel=new schema({
     author:{
         type:String
     },
-    genres: {
+    genre: {
         type:String
     },
     read:{
