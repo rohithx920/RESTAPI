@@ -27,7 +27,9 @@
 11) To Connect Mongodb 
  	open new cmd promt and start mongo server
 	using mongod command
-->C:\MongoDB\Server\3.4\bin>mongo
+->C:\MongoDB\Server\3.4\bin>mongod
+
+** to go to mongo shell use ->mongo cmd
 
 12)type gulp in our project floder
 
