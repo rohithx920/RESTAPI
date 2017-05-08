@@ -4,35 +4,13 @@ var routes=function(Book){
 //var Book=require('../models/bookModel');
 
 var bookRouter = express.Router();
+
+var bookController=require('../Controllers/bookControllers')(Book);
+
 //better way to handle all the 
 bookRouter.route('/')
-        .post(function(req,res){
-            console.log(req.body);
-            var book=new Book(req.body);
-            book.save();
-            console.log(book);
-            res.status(201).send(book);
-        })
-        .get(function(req,res){
-            //var query=req.query;
-            var query={};
-            if(req.query.genre){
-                query.genre=req.query.genre;
-            }
-            Book.find(query,function(err,books){
-                if(err){
-                    res.status(500).send(err);
-                    console.log(err);
-                }
-                else{
-                    console.log('connected');
-                    res.json(books);
-                }
-            })
-            
-            //var responseJson={Hello:'My api'};
-            //res.json(responseJson);
-        });
+        .post(bookController.post)
+        .get(bookController.get);
 
 //For single id
 bookRouter.use('/:bookId',function(req,res,next){
@@ -55,7 +33,11 @@ bookRouter.use('/:bookId',function(req,res,next){
 bookRouter.route('/:bookId')
         .get(function(req,res){
             console.log('we are in get');
-            res.json(req.book);
+            var returnBook=req.book.toJSON();
+            returnBook.links={};
+            returnBook.links.SimilarGenre='http://'+req.headers.host+'/api/books/?genre='+req.book.genre
+            
+            res.json(returnBook);
         })
         .put(function(req,res){
                
